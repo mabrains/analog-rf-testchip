@@ -1,0 +1,9 @@
+#OTA
+.SUBCKT OTA
+Minp acm inp dcm gnd 	   	 nfet01_v8 L=500e-9 W=16e-6
+Minn out inn dcm gnd   	nfet01_v8 L=500e-9 W=16e-6
+Mm dcm mbias gnd gnd         	nfet01_v8 L=1e-6 W=30e-6
+Mb mbias mbias gnd gnd 	nfet01_v8 L=1e-6 W=1e-6
+Mpn out acm vdd vdd 	 	pfet01_v8 L=500e-9 W=30e-6
+Mpp acm acm vdd vdd 	 	pfet01_v8 L=500e-9 W=30e-6
+.ENDS OTA
