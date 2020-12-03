@@ -34,7 +34,7 @@ In this tapeout, we are planning to achieve the following:
 ## Thursday December 17th, 2020
 - Add a second stage for the OTA and have double stage OTA to achieve higher gain.
 
-
+## Contributers
 - Design automation Done by [Ali Elshorbagy](https://github.com/Ali-Elshorbagy)
 - Layout automation done by [Mina Maksimous](https://github.com/MinaMaksimous)
 - Under supervision of [Amr Tork](https://github.com/atorkmabrains)
