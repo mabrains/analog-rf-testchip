@@ -11,7 +11,7 @@ layout.dbu = 0.001
 
 wrapper_path = os.path.join(os.path.abspath(".."), "gds", "user_project_wrapper_empty.gds")
 layout.read(wrapper_path)
-output_layout_path = os.path.join(os.path.abspath(".."), "gds", "analog_rf_wrapper.gds")
+output_layout_path = os.path.join(os.path.abspath(".."), "gds", "analog_rf_wrapper_gen.gds")
 gds_files = glob.glob(os.path.join("*", "*.gds"))
 
 wrapper_top_cell = "user_project_wrapper"
