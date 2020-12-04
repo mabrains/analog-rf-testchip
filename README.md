@@ -37,4 +37,3 @@ In this tapeout, we are planning to achieve the following:
 ## Contributers
 - Design automation Done by [Ali Elshorbagy](https://github.com/Ali-Elshorbagy)
 - Layout automation done by [Mina Maksimous](https://github.com/MinaMaksimous)
-- Under supervision of [Amr Tork](https://github.com/atorkmabrains)
