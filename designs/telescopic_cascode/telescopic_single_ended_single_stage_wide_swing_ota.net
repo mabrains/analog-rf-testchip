@@ -1,0 +1,80 @@
+* telescopic cascode ota
+
+.include ~/mabrains/skywater-pdk/libraries/sky130_fd_pr/latest/models/corners/tt.spice
+
+.param D_S_length = 1
+
+*input
+.param Linp = 1
+.param Winp = 2
+
+.param Linn = 1
+.param Winn = 2
+
+* input cascode
+.param Lcnp = 2
+.param Wcnp = 5
+
+.param Lcnn = 2
+.param Wcnn = 5
+
+* pmos load n
+.param Llpn1= .15
+.param Wlpn1 = 1
+
+.param Llpn2= .15
+.param Wlpn2 = 40
+
+* pmos load p
+.param Llpp1= .15
+.param Wlpp1 = 1
+
+.param Llpp2= .15
+.param Wlpp2 = 40
+
+*** mirror ota
+.param Lmota1= 1
+.param Wmota1 = 5
+.param nfmota1 = 1.0
+
+.param Lmota2 = 1
+.param Wmota2 = 5
+.param nfmota2 = 1.0
+
+
+
+******ota
+
+*** input
+Xinp inp_d inp dcm gnd sky130_fd_pr__nfet_01v8 L={Linp} W={Winp} AS={D_S_length*Winp} AD={D_S_length*Winp} PS={2*(D_S_length+Winp)} PD={2*(D_S_length+Winp)}
+Xinn inn_d inn dcm gnd sky130_fd_pr__nfet_01v8 L={Linn} W={Winn} AS={D_S_length*Winn} AD={D_S_length*Winn} PS={2*(D_S_length+Winn)} PD={2*(D_S_length+Winn)}
+
+*** input cascode
+Xcnp acm vncas inp_d gnd sky130_fd_pr__nfet_01v8 L={Lcnp} W={Wcnp} AS={D_S_length*Wcnp} AD={D_S_length*Wcnp} PS={2*(D_S_length+Wcnp)} PD={2*(D_S_length+Wcnp)}
+Xcnn out vncas inn_d gnd sky130_fd_pr__nfet_01v8 L={Lcnn} W={Wcnn} AS={D_S_length*Wcnn} AD={D_S_length*Wcnn} PS={2*(D_S_length+Wcnn)} PD={2*(D_S_length+Wcnn)}
+
+***pmos load n
+Xlpn1 pln_node acm vdd vdd sky130_fd_pr__pfet_01v8 L={Llpn1} W={Wlpn1} AS={D_S_length*Wlpn1} AD={D_S_length*Wlpn1} PS={2*(D_S_length+Wlpn1)} PD={2*(D_S_length+Wlpn1)}
+Xlpn2 out vpcas pln_node vdd sky130_fd_pr__pfet_01v8 L={Llpn2} W={Wlpn2} AS={D_S_length*Wlpn2} AD={D_S_length*Wlpn2} PS={2*(D_S_length+Wlpn2)} PD={2*(D_S_length+Wlpn2)}
+
+*** pmos load p
+Xpp1 plp_node acm vdd vdd sky130_fd_pr__pfet_01v8 L={Llpp1} W={Wlpp1} AS={D_S_length*Wlpp1} AD={D_S_length*Wlpp1} PS={2*(D_S_length+Wlpp1)} PD={2*(D_S_length+Wlpp1)}
+Xlpp2 acm vpcas plp_node vdd sky130_fd_pr__pfet_01v8 L={Llpp2} W={Wlpp2} AS={D_S_length*Wlpp2} AD={D_S_length*Wlpp2} PS={2*(D_S_length+Wlpp2)} PD={2*(D_S_length+Wlpp2)}
+
+*** mirror ota
+Xmota1 dcm vbn1 mirr_ota_node gnd sky130_fd_pr__nfet_01v8 nf={nfmota1} L={Lmota1} W={Wmota1} AS={D_S_length*Wmota1} AD={D_S_length*Wmota1} PS={2*(D_S_length+Wmota1)} PD={2*(D_S_length+Wmota1)}
+Xmota2 mirr_ota_node vbn2 gnd gnd sky130_fd_pr__nfet_01v8 nf={nfmota2} L={Lmota2} W={Wmota2} AS={D_S_length*Wmota2} AD={D_S_length*Wmota2} PS={2*(D_S_length+Wmota2)} PD={2*(D_S_length+Wmota2)}
+
+***mirror voltage 
+
+Vmn1 vbn1 0  DC 0.8
+Vmn2 vbn2 0  DC 0.65
+Vmn3 vncas 0 DC 1.3
+vbp vpcas 0  DC 0.8
+
+
+
+
+
+
+

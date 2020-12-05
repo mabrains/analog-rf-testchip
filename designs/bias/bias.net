@@ -1,0 +1,23 @@
+* LDO 
+
+.include ~/mabrains/skywater-pdk/libraries/sky130_fd_pr/latest/models/corners/tt.spice
+
+
+.param D_S_length = 1
+
+
+Xb mirror inp dcm dcm sky130_fd_pr__nfet_01v8 L={Linp} W={Winp} AS={D_S_length*Winp} AD={D_S_length*Winp} PS={2*(D_S_length+Winp)} PD={2*(D_S_length+Winp)}
+Xpmirror mirror mirror vdd vdd sky130_fd_pr__pfet_01v8 L={Lpmirror} W={Wpmirror} AS={D_S_length*Wpmirror} AD={D_S_length*Wpmirror} PS={2*(D_S_length+Wpmirror)} PD={2*(D_S_length+Wpmirror)}
+
+
+.control
+op
+print V(out1) V(dcm) V(out2) V(mirror) V(bias) V(ldo) V(inn)
+
+ac dec 20 1 1G
+plot 20*log10(V(out1)) 20*log10(V(out2))
+.endc
+.end
+
+
+

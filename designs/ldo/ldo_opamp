@@ -1,0 +1,193 @@
+* LDO OTA
+
+.include ~/mabrains/skywater-pdk/libraries/sky130_fd_pr/latest/models/corners/tt.spice
+
+.param D_S_length = 1
+*************************
+*first_stage
+*************************
+*input diff pair
+.param Linp = 2
+.param Winp = 3
+
+.param Linn = 2
+.param Winn = 3
+
+* pmos load 
+.param Lpmirror= 0.5
+.param Wpmirror= 7
+
+.param Lpout1= 0.5
+.param Wpout1= 7
+
+*current mirror transistor
+.param Lcm1 = 0.5
+.param Wcm1 = 5
+**************************
+*second_stage
+*************************
+*input device
+.param Lin2= 0.5
+.param Win2 = 5
+
+*current mirror transistor
+.param Lcm2= 0.5
+.param Wcm2 = 5
+*************************
+*reference branch
+*************************
+*biasing transistor
+.param Lbias= 0.5
+.param Wbias= 5
+************************
+
+
+*first stage 
+*** input diff pair
+Xinp mirror inp dcm dcm sky130_fd_pr__nfet_01v8 L={Linp} W={Winp} AS={D_S_length*Winp} AD={D_S_length*Winp} PS={2*(D_S_length+Winp)} PD={2*(D_S_length+Winp)}
+Xinn out1 inn dcm dcm sky130_fd_pr__nfet_01v8 L={Linn} W={Winn} AS={D_S_length*Winn} AD={D_S_length*Winn} PS={2*(D_S_length+Winn)} PD={2*(D_S_length+Winn)}
+
+*** pmos load
+Xpmirror mirror mirror vdd vdd sky130_fd_pr__pfet_01v8 L={Lpmirror} W={Wpmirror} AS={D_S_length*Wpmirror} AD={D_S_length*Wpmirror} PS={2*(D_S_length+Wpmirror)} PD={2*(D_S_length+Wpmirror)}
+Xpout1 out1 mirror vdd vdd sky130_fd_pr__pfet_01v8 L={Lpout1} W={Wpout1} AS={D_S_length*Wpout1} AD={D_S_length*Wpout1} PS={2*(D_S_length+Wpout1)} PD={2*(D_S_length+Wpout1)}
+
+***current mirror transistor
+Xcm1 dcm bias gnd gnd sky130_fd_pr__nfet_01v8 L={Lcm1} W={Wcm1} AS={D_S_length*Wcm1} AD={D_S_length*Wcm1} PS={2*(D_S_length+Wcm1)} PD={2*(D_S_length+Wcm1)}
+
+
+*second stage
+***input device
+Xin2 out2 out1 vdd vdd sky130_fd_pr__pfet_01v8 L={Lin2} W={Win2} AS={D_S_length*Win2} AD={D_S_length*Win2} PS={2*(D_S_length+Win2)} PD={2*(D_S_length+Win2)}
+Xin2_2 out2 out1 vdd vdd sky130_fd_pr__pfet_01v8 L={Lin2} W={Win2} AS={D_S_length*Win2} AD={D_S_length*Win2} PS={2*(D_S_length+Win2)} PD={2*(D_S_length+Win2)}
+Xin2_3 out2 out1 vdd vdd sky130_fd_pr__pfet_01v8 L={Lin2} W={Win2} AS={D_S_length*Win2} AD={D_S_length*Win2} PS={2*(D_S_length+Win2)} PD={2*(D_S_length+Win2)}
+Xin2_4 out2 out1 vdd vdd sky130_fd_pr__pfet_01v8 L={Lin2} W={Win2} AS={D_S_length*Win2} AD={D_S_length*Win2} PS={2*(D_S_length+Win2)} PD={2*(D_S_length+Win2)}
+Xin2_5 out2 out1 vdd vdd sky130_fd_pr__pfet_01v8 L={Lin2} W={Win2} AS={D_S_length*Win2} AD={D_S_length*Win2} PS={2*(D_S_length+Win2)} PD={2*(D_S_length+Win2)}
+Xin2_6 out2 out1 vdd vdd sky130_fd_pr__pfet_01v8 L={Lin2} W={Win2} AS={D_S_length*Win2} AD={D_S_length*Win2} PS={2*(D_S_length+Win2)} PD={2*(D_S_length+Win2)}
+Xin2_7 out2 out1 vdd vdd sky130_fd_pr__pfet_01v8 L={Lin2} W={Win2} AS={D_S_length*Win2} AD={D_S_length*Win2} PS={2*(D_S_length+Win2)} PD={2*(D_S_length+Win2)}
+Xin2_8 out2 out1 vdd vdd sky130_fd_pr__pfet_01v8 L={Lin2} W={Win2} AS={D_S_length*Win2} AD={D_S_length*Win2} PS={2*(D_S_length+Win2)} PD={2*(D_S_length+Win2)}
+*** current mirror transistor
+Xcm2 out2 bias gnd gnd sky130_fd_pr__nfet_01v8 L={Lcm2} W={Wcm2} AS={D_S_length*Wcm2} AD={D_S_length*Wcm2} PS={2*(D_S_length+Wcm2)} PD={2*(D_S_length+Wcm2)}
+Xcm2_2 out2 bias gnd gnd sky130_fd_pr__nfet_01v8 L={Lcm2} W={Wcm2} AS={D_S_length*Wcm2} AD={D_S_length*Wcm2} PS={2*(D_S_length+Wcm2)} PD={2*(D_S_length+Wcm2)}
+Xcm2_3 out2 bias gnd gnd sky130_fd_pr__nfet_01v8 L={Lcm2} W={Wcm2} AS={D_S_length*Wcm2} AD={D_S_length*Wcm2} PS={2*(D_S_length+Wcm2)} PD={2*(D_S_length+Wcm2)}
+
+
+
+*** biasing transistor
+Xbias bias bias gnd gnd sky130_fd_pr__nfet_01v8 L={Lbias} W={Wbias} AS={D_S_length*Wbias} AD={D_S_length*Wbias} PS={2*(D_S_length+Wbias)} PD={2*(D_S_length+Wbias)}
+
+***voltages and current sources
+
+Iref vdd bias 5u
+VDD vdd 0 DC 1.8
+Vinp inp 0 DC 1.2 AC 0.5
+Vinn inn 0 DC 1.2 AC -0.5
+C1 out1 out2 3p
+C2 out2 gnd 20p
+
+.control
+op
+print @m.xinp.msky130_fd_pr__nfet_01v8[gm]
+print @m.xinp.msky130_fd_pr__nfet_01v8[id]
+print @m.xinp.msky130_fd_pr__nfet_01v8[vds]
+print @m.xinp.msky130_fd_pr__nfet_01v8[vgs]
+print @m.xinp.msky130_fd_pr__nfet_01v8[vth]
+print @m.xinp.msky130_fd_pr__nfet_01v8[vdsat]
+print 1/@m.xinp.msky130_fd_pr__nfet_01v8[gds]
+
+print @m.xinn.msky130_fd_pr__nfet_01v8[gm]
+print @m.xinn.msky130_fd_pr__nfet_01v8[id]
+print @m.xinn.msky130_fd_pr__nfet_01v8[vds]
+print @m.xinn.msky130_fd_pr__nfet_01v8[vgs]
+print @m.xinn.msky130_fd_pr__nfet_01v8[vth]
+print @m.xinn.msky130_fd_pr__nfet_01v8[vdsat]
+print 1/@m.xinn.msky130_fd_pr__nfet_01v8[gds]
+
+print @m.xbias.msky130_fd_pr__nfet_01v8[gm]
+print @m.xbias.msky130_fd_pr__nfet_01v8[id]
+print @m.xbias.msky130_fd_pr__nfet_01v8[vds]
+print @m.xbias.msky130_fd_pr__nfet_01v8[vgs]
+print @m.xbias.msky130_fd_pr__nfet_01v8[vth]
+print @m.xbias.msky130_fd_pr__nfet_01v8[vdsat]
+print 1/@m.xbias.msky130_fd_pr__nfet_01v8[gds]
+
+print @m.xcm1.msky130_fd_pr__nfet_01v8[gm]
+print @m.xcm1.msky130_fd_pr__nfet_01v8[id]
+print @m.xcm1.msky130_fd_pr__nfet_01v8[vds]
+print @m.xcm1.msky130_fd_pr__nfet_01v8[vgs]
+print @m.xcm1.msky130_fd_pr__nfet_01v8[vth]
+print @m.xcm1.msky130_fd_pr__nfet_01v8[vdsat]
+print 1/@m.xcm1.msky130_fd_pr__nfet_01v8[gds]
+
+print @m.xcm2.msky130_fd_pr__nfet_01v8[gm]
+print @m.xcm2.msky130_fd_pr__nfet_01v8[id]
+print @m.xcm2.msky130_fd_pr__nfet_01v8[vds]
+print @m.xcm2.msky130_fd_pr__nfet_01v8[vgs]
+print @m.xcm2.msky130_fd_pr__nfet_01v8[vth]
+print @m.xcm2.msky130_fd_pr__nfet_01v8[vdsat]
+print 1/@m.xcm2.msky130_fd_pr__nfet_01v8[gds]
+
+print @m.xcm2_2.msky130_fd_pr__nfet_01v8[gm]
+print @m.xcm2_2.msky130_fd_pr__nfet_01v8[id]
+print @m.xcm2_2.msky130_fd_pr__nfet_01v8[vds]
+print @m.xcm2_2.msky130_fd_pr__nfet_01v8[vgs]
+print @m.xcm2_2.msky130_fd_pr__nfet_01v8[vth]
+print @m.xcm2_2.msky130_fd_pr__nfet_01v8[vdsat]
+print 1/@m.xcm2_2.msky130_fd_pr__nfet_01v8[gds]
+
+print @m.xcm2_3.msky130_fd_pr__nfet_01v8[gm]
+print @m.xcm2_3.msky130_fd_pr__nfet_01v8[id]
+print @m.xcm2_3.msky130_fd_pr__nfet_01v8[vds]
+print @m.xcm2_3.msky130_fd_pr__nfet_01v8[vgs]
+print @m.xcm2_3.msky130_fd_pr__nfet_01v8[vth]
+print @m.xcm2_3.msky130_fd_pr__nfet_01v8[vdsat]
+print 1/@m.xcm2_3.msky130_fd_pr__nfet_01v8[gds]
+
+print @m.xpmirror.msky130_fd_pr__pfet_01v8[gm]
+print @m.xpmirror.msky130_fd_pr__pfet_01v8[id]
+print @m.xpmirror.msky130_fd_pr__pfet_01v8[vds]
+print @m.xpmirror.msky130_fd_pr__pfet_01v8[vgs]
+print @m.xpmirror.msky130_fd_pr__pfet_01v8[vth]
+print @m.xpmirror.msky130_fd_pr__pfet_01v8[vdsat]
+print 1/@m.xpmirror.msky130_fd_pr__pfet_01v8[gds]
+
+print @m.xpout1.msky130_fd_pr__pfet_01v8[gm]
+print @m.xpout1.msky130_fd_pr__pfet_01v8[id]
+print @m.xpout1.msky130_fd_pr__pfet_01v8[vds]
+print @m.xpout1.msky130_fd_pr__pfet_01v8[vgs]
+print @m.xpout1.msky130_fd_pr__pfet_01v8[vth]
+print @m.xpout1.msky130_fd_pr__pfet_01v8[vdsat]
+print 1/@m.xpout1.msky130_fd_pr__pfet_01v8[gds]
+
+print @m.xin2.msky130_fd_pr__pfet_01v8[gm]
+print @m.xin2.msky130_fd_pr__pfet_01v8[id]
+print @m.xin2.msky130_fd_pr__pfet_01v8[vds]
+print @m.xin2.msky130_fd_pr__pfet_01v8[vgs]
+print @m.xin2.msky130_fd_pr__pfet_01v8[vth]
+print @m.xin2.msky130_fd_pr__pfet_01v8[vdsat]
+print 1/@m.xin2.msky130_fd_pr__pfet_01v8[gds]
+
+print @m.xin2_2.msky130_fd_pr__pfet_01v8[gm]
+print @m.xin2_2.msky130_fd_pr__pfet_01v8[id]
+print @m.xin2_2.msky130_fd_pr__pfet_01v8[vds]
+print @m.xin2_2.msky130_fd_pr__pfet_01v8[vgs]
+print @m.xin2_2.msky130_fd_pr__pfet_01v8[vth]
+print @m.xin2_2.msky130_fd_pr__pfet_01v8[vdsat]
+print 1/@m.xin2_2.msky130_fd_pr__pfet_01v8[gds]
+
+print @m.xin2_3.msky130_fd_pr__pfet_01v8[gm]
+print @m.xin2_3.msky130_fd_pr__pfet_01v8[id]
+print @m.xin2_3.msky130_fd_pr__pfet_01v8[vds]
+print @m.xin2_3.msky130_fd_pr__pfet_01v8[vgs]
+print @m.xin2_3.msky130_fd_pr__pfet_01v8[vth]
+print @m.xin2_3.msky130_fd_pr__pfet_01v8[vdsat]
+print 1/@m.xin2_3.msky130_fd_pr__pfet_01v8[gds]
+
+print V(out1) V(dcm) V(out2) V(mirror) V(bias)
+
+ac dec 20 1 1G
+plot 20*log10(V(out1)) 20*log10(V(out2))
+.endc
+.end
+
+
+
