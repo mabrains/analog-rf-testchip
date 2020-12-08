@@ -1,0 +1,9 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1607247055
+use sky130_fd_pr__nfet_01v8_PFJCJ7  sky130_fd_pr__nfet_01v8_PFJCJ7_0
+timestamp 1607247055
+transform 1 0 1404 0 1 722
+box -1457 -775 1457 775
+<< end >>
